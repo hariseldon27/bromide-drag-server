@@ -3,6 +3,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
     private
   
+    def current_token
+      request.env['warden-jwt_auth.token']
+    end
+
     def respond_with(resource, _opts = {})
       register_success && return if resource.persisted?
   
@@ -10,10 +14,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   
     def register_success
-      render json: { message: 'Signed up sucessfully.' }
+      @token = current_token
+      render json: { message: 'Signed up sucessfully.', user: current_user, token: @token }
     end
   
     def register_failed
       render json: { message: "Something went wrong." }
     end
+    
   end
