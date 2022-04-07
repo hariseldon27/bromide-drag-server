@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
     }
   get '/member-data', to: 'users#show'
-  put '/profile-photo', to: 'users#add_profile_photo'
+  patch '/profile-photo/:id', to: 'users#add_profile_photo'
+  
 
 end

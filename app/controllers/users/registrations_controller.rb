@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
     def register_success
       @token = current_token
-      render json: { message: 'Signed up sucessfully.', user: current_user, token: @token }
+      render json: { message: 'Signed up sucessfully.', user: current_user, token: @token, id: current_user.id}
     end
   
     def register_failed
