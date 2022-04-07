@@ -12,9 +12,9 @@ class UsersController < ApplicationController
     end
     def add_profile_photo
         # user = User.find_by!(id: params[:id])
-        byebug
+        # byebug
         current_user.avatar.attach(params[:avatar])
-        render json: {user: user, avatar: show_avatar}, status: :ok
+        render json: {user: current_user, avatar: show_avatar}, status: :ok
     end
 
     private
@@ -23,7 +23,8 @@ class UsersController < ApplicationController
     end
     def show_avatar
         if current_user.avatar.attached?
-            return rails_blob_path(current_user.avatar, disposition: "attachment")
+            host = "http://localhost:3000/"
+            return host + rails_blob_path(current_user.avatar, disposition: "attachment")
         else 
             return
         end
