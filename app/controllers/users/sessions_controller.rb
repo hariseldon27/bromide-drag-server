@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
   
     def respond_with(resource, _opts = {})
       @token = current_token
-      render json: { message: 'You are logged in.', token: @token }, status: :ok
+      render json: { message: 'You are logged in.', token: @token, id: current_user.id }, status: :ok
     end
   
     def respond_to_on_destroy
@@ -30,6 +30,6 @@ class Users::SessionsController < Devise::SessionsController
   #   super { @token = current_token }
   # end
 
-  def current_token
-    request.env['warden-jwt_auth.token']
-  end
+  # def current_token
+  #   request.env['warden-jwt_auth.token']
+  # end
