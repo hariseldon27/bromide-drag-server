@@ -54,3 +54,6 @@ gem "active_model_serializers", "~> 0.10.13"
 gem 'devise'
 # JWT tokens for auth
 gem 'devise-jwt'
+
+#aws s3
+gem 'aws-sdk-s3', '~> 1.113'
