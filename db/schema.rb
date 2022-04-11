@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_05_203134) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_11_172944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,33 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_203134) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "blocks", force: :cascade do |t|
+    t.bigint "gallery_id", null: false
+    t.string "block_type"
+    t.string "text"
+    t.string "bg_color"
+    t.string "font_color"
+    t.string "font_size"
+    t.string "font"
+    t.string "text_align"
+    t.string "text_location"
+    t.string "width"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gallery_id"], name: "index_blocks_on_gallery_id"
+  end
+
+  create_table "galleries", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.boolean "published"
+    t.date "published_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_galleries_on_user_id"
+  end
+
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
     t.datetime "exp", null: false
@@ -62,4 +89,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_203134) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "blocks", "galleries"
+  add_foreign_key "galleries", "users"
 end
