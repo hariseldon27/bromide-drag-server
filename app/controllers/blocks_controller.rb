@@ -4,14 +4,14 @@ class BlocksController < ApplicationController
 
     def new_block
         # byebug
-        gallery = Gallery.find_by!(id: params[:id])
+        gallery = Gallery.find_by!(id: params[:gallery_id])
         new_block = gallery.blocks.create!( block_params )
         render json: new_block
     end
 
     private
     def block_params
-        params.require(:block).permit(:gallery_id, :block_type, :text, :image, :bg_color, :font_color, :font_size, :width, :text_align, :text_location )
+        params.permit(:gallery_id, :block_type, :text, :image, :bg_color, :font, :font_color, :font_size, :width, :text_align, :text_location )
     end
 
 end

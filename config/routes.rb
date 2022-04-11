@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/member-data', to: 'users#show'
   patch '/profile-photo/:id', to: 'users#add_profile_photo'
   
-  post '/new-block/:id', to: 'blocks#new_block'  
+  post '/new-block/', to: 'blocks#new_block'  
 
   get '/user-galleries', to: 'galleries#user_galleries'
 
