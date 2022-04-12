@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  # resources :blocks
-  # resources :galleries
-  # resources :blocks, only: [:show, :index, :create, :update]
-  # resources :galleries, only: [:show, :index, :create, :update]
+
   devise_for :users,
     controllers: {
         sessions: 'users/sessions',
@@ -14,6 +11,7 @@ Rails.application.routes.draw do
   post '/new-block/', to: 'blocks#new_block'  
 
   get '/user-galleries', to: 'galleries#user_galleries'
+  get '/gallery/:id', to: 'galleries#show'
 
   post '/new-gallery', to: 'galleries#new_gallery'
     # POST => gallery#create /new-gallery create new gallery

@@ -25,8 +25,6 @@ class UsersController < ApplicationController
         if current_user.avatar.attached?
             host = "http://localhost:3000"
             return host + rails_blob_path(current_user.avatar, disposition: "attachment")
-            # current_user.avatar.url
-            # url_for(current_user.avatar)
         else 
             return
         end
