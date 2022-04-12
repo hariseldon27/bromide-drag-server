@@ -32,7 +32,8 @@ class GalleriesController < ApplicationController
 
     def publish
         gallery = Gallery.find_by!(id: params[:id])
-        gallery.update!(gallery_params)
+        # byebug
+        gallery.update(gallery_params)
         render json: gallery, status: :ok
     end
 
