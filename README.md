@@ -27,19 +27,21 @@ Be sure to go grab the CLIENT here: https://github.com/hariseldon27/bromide-drag
 
 ---
 ### What's working:
->Login / Sign-up: it's working, auth is by JWT and Devise - so we auth on all calls for protected routes.  However! We don't have any validation in place.
+>**Login / Sign-up:** it's working, auth is by JWT and Devise - so we auth on all calls for protected routes.  However! We don't have any validation in place.
 
->User > Galleries > Blocks > Images : By some miracle all the end-points needed for the user galleries are working. However, due to the relationship construction some of the associations are convoluted 
+>**User > Galleries > Blocks > Images:** By some miracle all the end-points needed for the user galleries are working. However, due to the relationship construction some of the associations are convoluted 
 
->ActiveStorage::S3 : This works, and it's pretty slick.  Just uploads straight to the specified bucket. No sizing variants yet.
+>**ActiveStorage::S3:** This works, and it's pretty slick.  Just uploads straight to the specified bucket. No sizing variants yet.
 
->Devise Auth: This works, but not all the elements are implemented. Issues JWT each time user logs in, and adds it to the JWTDenyList after a timeout.
+>**Devise Auth:** This works, but not all the elements are implemented. Issues JWT each time user logs in, and adds it to the JWTDenyList after a timeout.
 
 ### What's still to come?
->Devise password reset: I'd love to get this working.
+>**Devise password reset:** I'd love to get this working.
 
->Error handling/Validation: This is a way stripped out app (error handling wise) - as noted in the Client there is almost no error handling - Need to add ActiveRecord flags and errors specifically.
+>**Error handling/Validation:** This is a way stripped out app (error handling wise) - as noted in the Client there is almost no error handling - Need to add ActiveRecord flags and errors specifically.
 
->Custom Public End Points: Need to namepsace the gallery public URLS, and create user retrievable URLS (table for this?) Ideas?
+>**Custom Public End Points:** Need to namepsace the gallery public URLS, and create user retrievable URLS (table for this?) Ideas?
+
+>**Deployment to Heroku**
 
 >See notes above too
