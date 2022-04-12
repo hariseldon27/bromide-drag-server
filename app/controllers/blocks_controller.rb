@@ -2,17 +2,37 @@ class BlocksController < ApplicationController
     before_action :authenticate_user!
 
     def new_block
-        # byebug
-        
+
+        image_attachment = params[:image]
         gallery = Gallery.find_by!(id: params[:gallery_id])
-        new_block = gallery.blocks.create!( block_params, except: :image )
-        new_block.image.attach(params[:image])
-        render json: new_block
+
+        @block = gallery.blocks.create( block_params )
+        @block.image.attach(image_attachment)
+
+        render json: @block
+    end
+
+    def gallery_blocks
+        gallery = Gallery.find_by!(id: params[:id])
+        blocks = gallery.blocks
+        # block_pics = blocks.all.with_attached_image
+        blocks.map do |b|
+            b[:image_url]=url_for(b.image)
+        end
+        # byebug
+        render json: blocks
     end
 
 
-
     private
+    # def show_block_image
+    #     if block.image.attached?
+    #         host = "http://localhost:3000"
+    #         return host + rails_blob_path(block.image, disposition: "attachment")
+    #     else 
+    #         return
+    #     end
+    # end
 
     def block_params
         params.permit(:gallery_id, :block_type, :text, :image, :bg_color, :font, :font_color, :font_size, :width, :text_align, :text_location )

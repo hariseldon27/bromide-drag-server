@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/user-galleries', to: 'galleries#user_galleries'
   get '/gallery/:id', to: 'galleries#show'
 
+  get '/gallery/:id/blocks', to: 'blocks#gallery_blocks'
+
   post '/new-gallery', to: 'galleries#new_gallery'
     # POST => gallery#create /new-gallery create new gallery
     # POST => gallery#block-builder /new-gallery/id/block-builder/
