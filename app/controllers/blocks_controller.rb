@@ -17,7 +17,7 @@ class BlocksController < ApplicationController
         blocks = gallery.blocks
         # block_pics = blocks.all.with_attached_image
         blocks.map do |b|
-            b[:image_url]=url_for(b.image)
+            b[:image_url]=url_for(b.image) if b.image.attached?
         end
         # byebug
         render json: blocks
