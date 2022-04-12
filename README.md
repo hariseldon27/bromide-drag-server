@@ -19,7 +19,7 @@ The client is built in React and uses React Router for front end navigation.
 ---
 
 ## Installation
-Fork and clone the repo, `bundle install` and `rails s` will get the server going.
+Fork and clone the repo, `bundle install`, `rails db:create db:migrate` and `rails s` will get the server going.
 
 Be sure to go grab the CLIENT here: https://github.com/hariseldon27/bromide-drag-client
 
