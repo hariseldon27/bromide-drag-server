@@ -5,18 +5,25 @@ Rails.application.routes.draw do
         sessions: 'users/sessions',
         registrations: 'users/registrations'
     }
+    # get basic user details
   get '/member-data', to: 'users#show'
-
+    # add (update) a profile photo to a user
   patch '/profile-photo/:id', to: 'users#add_profile_photo'
-  
+    # start new gallery
   post '/new-gallery', to: 'galleries#new_gallery'
+    # publish gallery
   patch '/gallery/:id', to: 'galleries#publish'
+    # get galleries with featured image url
   get '/user-galleries', to: 'galleries#user_galleries'
+    # get the main gallery item to retreive blocks
   get '/gallery/:id', to: 'galleries#show'
   
+  # create new block from gallery builder
   post '/new-block/', to: 'blocks#new_block'  
+  # get gallery blocks for show
   get '/gallery/:id/blocks', to: 'blocks#gallery_blocks'
 
-    # POST => gallery#create /new-gallery create new gallery
-    # POST => gallery#block-builder /new-gallery/id/block-builder/
+ 
+
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
