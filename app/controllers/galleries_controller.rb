@@ -4,23 +4,25 @@ class GalleriesController < ApplicationController
     def new_gallery
         # puts current_user
         user = current_user
+        #had signature errors on featured_image being passed as "undefined"  - added validation on FE too
         featured_image = params[:featured_image] if params[:featured_image]
-        # new_gallery = user.galleries.create( gallery_params )
-        new_gallery = Gallery.create(gallery_params )
+        # start a new gallery set user_id info out of the authenticated user (as default below)
+        new_gallery = Gallery.create( gallery_params )
+        # attach featured_image to newly created gallery
         new_gallery.featured_image.attach(featured_image)
-        # byebug
+        # give the gallery a static URL location for now based on the active storage link
         new_gallery.featured_image_url = url_for(new_gallery.featured_image) if new_gallery.featured_image.attached?
-        render json: new_gallery
+        # save the gallery with link
+        new_gallery.save
+        render json: new_gallery, status: :ok
     end
 
     def user_galleries
-        # byebug
         user = current_user
         galleries = user.galleries
-        galleries.map do |g|
-            g[:featured_image_url]=url_for(g.featured_image)
-        end
-        # byebug
+        # galleries.map do |g|
+        #     g[:featured_image_url]=url_for(g.featured_image)
+        # end
         render json: galleries
     end
 
@@ -30,7 +32,7 @@ class GalleriesController < ApplicationController
         render json: gallery
     end
 
-    def publish
+    def update
         gallery = Gallery.find_by!(id: params[:id])
         # byebug
         gallery.update(gallery_params)
@@ -41,6 +43,6 @@ class GalleriesController < ApplicationController
     private 
     def gallery_params
         default = {user_id: current_user.id}
-        params.permit( :gallery, :id, :title, :description, :user_id, :featured_image, :published, :published_on, :coda).reverse_merge(default)
+        params.permit( :gallery, :id, :title, :description, :user_id, :featured_image, :published, :published_on, :coda, :share_url).reverse_merge(default)
     end
 end

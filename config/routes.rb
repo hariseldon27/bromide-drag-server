@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   patch '/profile-photo/:id', to: 'users#add_profile_photo'
   
   post '/new-gallery', to: 'galleries#new_gallery'
-  patch '/gallery/:id', to: 'galleries#publish'
+  patch '/gallery/:id', to: 'galleries#update'
   get '/user-galleries', to: 'galleries#user_galleries'
   get '/gallery/:id', to: 'galleries#show'
   

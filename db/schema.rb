@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_12_062141) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_14_163938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_12_062141) do
     t.bigint "user_id", null: false
     t.string "coda"
     t.string "featured_image_url"
+    t.string "share_url"
     t.index ["user_id"], name: "index_galleries_on_user_id"
   end
 
