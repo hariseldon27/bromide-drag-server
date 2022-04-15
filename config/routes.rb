@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get '/user-galleries', to: 'galleries#user_galleries'
   get '/gallery/:id', to: 'galleries#show'
   
+  get '/share/:id', to: 'share#show'
+  
   post '/new-block/', to: 'blocks#new_block'  
   get '/gallery/:id/blocks', to: 'blocks#gallery_blocks'
 
