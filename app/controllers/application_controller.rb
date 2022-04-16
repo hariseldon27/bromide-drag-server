@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
     before_action :configure_permitted_parameters, if: :devise_controller?
 
+    rescue_from ActiveRecord::RecordNotUnique, with: :render_not_unique
+
     protected
   
     def configure_permitted_parameters
@@ -9,4 +11,9 @@ class ApplicationController < ActionController::API
 
     end
 
+    def render_not_unique(exception)
+      render json: { error: {statusText: "User Exists", status: 403 }}, status: :forbidden
+      # byebug
+
+    end
 end
