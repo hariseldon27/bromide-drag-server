@@ -8,8 +8,9 @@ class BlocksController < ApplicationController
 
         @block = gallery.blocks.create( block_params )
         @block.image.attach(image_attachment)
-
-        render json: @block
+        @block.image_url = url_for(@block.image_attachment) if @block.image.attached?
+        @block.save
+        render json: @block, status: :ok
     end
 
     def gallery_blocks
